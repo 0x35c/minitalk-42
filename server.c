@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:53 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/22 22:33:04 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/22 22:55:57 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ int main(void)
 	pid_t pid;
 	pid = getpid();
 	ft_printf("%d\n", pid);
+	ft_printf("Test git\n");
 	return (0);
 }
