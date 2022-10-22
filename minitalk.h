@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 22:23:53 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/22 22:33:04 by ulayus           ###   ########.fr       */
+/*   Created: 2022/10/22 22:28:07 by ulayus            #+#    #+#             */
+/*   Updated: 2022/10/22 22:36:09 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-int main(void)
-{
-	pid_t pid;
-	pid = getpid();
-	ft_printf("%d\n", pid);
-	return (0);
-}
+#include <signal.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "printf/ft_printf.h"
+
+#endif
