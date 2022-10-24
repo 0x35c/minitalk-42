@@ -6,35 +6,38 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/10/22 22:50:01 by ulayus           ###   ########.fr        #
+#    Updated: 2022/10/24 10:57:26 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = server
+SERV_SRC = server.c
 
-SRCS = server.c
+CLIENT_SRC = client.c
 
 CC = @gcc
 
 CFLAGS = -g -Wall -Wextra -Werror
 
-LIBS = -Lprintf -lftprintf
+LIBS = -Lprintf -lftprintf -Llibft -lft
+SERV_OBJ = $(SERV_SRC:.c=.o)
+CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 
-OBJ = $(SRCS:.c=.o)
+all: server client
 
-all: $(NAME) 
+client: ${CLIENT_OBJ}
+	$(CC) -o client $(CLIENT_OBJ) $(LIBS)
 
-$(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LIBS)
+server: ${SERV_OBJ}
+	$(CC) -o server $(SERV_OBJ) $(LIBS)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(CLIENT_OBJ) $(SERV_OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f client server
 
 re: all clean
 
