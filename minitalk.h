@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:28:07 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/24 18:28:42 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/25 10:42:54 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 # include "printf/ft_printf.h"
 # include "libft/libft.h"
 
-typedef struct s_bit_compose
+typedef struct s_str_compose
 {
 	char	c;
 	int		pos;
-}	t_bit_compose;
+	int		nb_bit;
+}	t_str_compose;
 
 #endif
