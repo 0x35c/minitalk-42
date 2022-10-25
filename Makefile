@@ -6,7 +6,7 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/10/25 00:00:50 by ulayus           ###   ########.fr        #
+#    Updated: 2022/10/25 16:19:50 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC = @gcc
 
 CFLAGS = -g -Wall -Wextra -Werror
 
-LIBS = -Lprintf -lftprintf -Llibft -lft
+LIBS = -Llibft -lft -Llibft/printf -lftprintf
 SERV_OBJ = $(SERV_SRC:.c=.o)
 CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 

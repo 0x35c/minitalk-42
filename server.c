@@ -6,86 +6,50 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:53 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/25 11:26:32 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/25 17:18:51 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-t_str_compose	g_bit;
+t_bit_joiner	g_server;
 
-void	handler_sig1(int sig)
+void	handler_sig(int sig)
 {
-	//ft_printf("SIGUSR1 - Start\n");
-	if (sig)
+	if (sig == SIGUSR1)
+		g_server.c += g_server.pos;
+	g_server.pos >>= 1;
+	if (g_server.nb_bit == 8)
 	{
-		//ft_printf("Pos: %d\n", g_bit.pos);
-		g_bit.c += g_bit.pos;
-		//ft_printf("Pos: %d, binary char: %d\n", g_bit.pos, g_bit.c);
-		g_bit.pos <<= 1;
-	}
-	if (g_bit.nb_bit == 8 && g_bit.c)
-	{
-		//ft_printf("Check 2, nb_bit: %d\n", g_bit.nb_bit);
-		//ft_printf("Char: %d -> %c\n", g_bit.c, g_bit.c);
-		ft_printf("%c", g_bit.c);
-		g_bit.c = 0;
-		g_bit.pos = 1;
-		g_bit.nb_bit = 1;
+		g_server.str = ft_strjoin_c(g_server.str, g_server.c);
+		if (g_server.c == 0)
+		{
+			ft_printf("%s\n", g_server.str);
+			//g_server.str[0] = '\0';
+			free(g_server.str);
+			g_server.str = NULL;
+		}
+		g_server.c = 0;
+		g_server.pos = 0b10000000;
+		g_server.nb_bit = 1;
 	}
 	else
-	{
-		g_bit.nb_bit++;
-		//ft_printf("Check 1, nb_bit: %d, char: %c\n", g_bit.nb_bit, g_bit.c);
-	}
-	//ft_printf("SIGUSR1 - End\n");
-	//ft_printf("\n");
-}
-
-void	handler_sig2(int sig)
-{
-	//ft_printf("SIGUSR2 - Start\n");
-	if (sig)
-	{
-		//ft_printf("Pos: %d\n", g_bit.pos);
-		g_bit.pos <<= 1;
-		//ft_printf("Pos: %d, binary char: %d\n", g_bit.pos, g_bit.c);
-	}
-	if (g_bit.nb_bit == 8)
-	{
-		//ft_printf("Check 2, nb_bit: %d\n", g_bit.nb_bit);
-		//ft_printf("Char: %d -> %c\n", g_bit.c, g_bit.c);
-		ft_printf("%c", g_bit.c);
-		g_bit.c = 0;
-		g_bit.pos = 1;
-		g_bit.nb_bit = 1;
-	}
-	else
-	{
-		g_bit.nb_bit++;
-		//ft_printf("Check 1, nb_bit: %d, char: %c\n", g_bit.nb_bit, g_bit.c);
-	}
-	//ft_printf("SIGUSR2 - End\n");
-	//ft_printf("\n");
+		g_server.nb_bit++;
 }
 
 int	main(void)
 {
-	struct sigaction	act1;
-	struct sigaction	act2;
-	pid_t				pid;
+	pid_t	pid;
 
 	pid = getpid();
 	ft_printf("%d\n", pid);
-	g_bit.c = 0;
-	g_bit.nb_bit = 1;
-	g_bit.pos = 1;	
-	act1.sa_handler = handler_sig1;
-	sigaction(SIGUSR1, &act1, NULL);
-	act2.sa_handler = handler_sig2;
-	sigaction(SIGUSR2, &act2, NULL);
+	g_server.c = 0;
+	g_server.str = NULL;
+	g_server.nb_bit = 1;
+	g_server.pos = 0b10000000;	
+	signal(SIGUSR1, handler_sig);
+	signal(SIGUSR2, handler_sig);
 	while (1)
-	{
-	}
+		;
 	return (0);
 }
