@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:53 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/25 17:18:51 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/27 11:56:37 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	handler_sig(int sig)
 		g_server.str = ft_strjoin_c(g_server.str, g_server.c);
 		if (g_server.c == 0)
 		{
-			ft_printf("%s\n", g_server.str);
-			//g_server.str[0] = '\0';
+			ft_printf("%s", g_server.str);
 			free(g_server.str);
 			g_server.str = NULL;
 		}

@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:28:07 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/25 17:14:13 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/27 11:57:07 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <signal.h>
 # include <sys/types.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include "libft/libft.h"
 
 typedef struct s_bit_joiner

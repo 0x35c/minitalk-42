@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:43 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/25 17:08:19 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/27 11:56:23 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	send_char_serv(char c, pid_t pid_server)
 			if (kill(pid_server, SIGUSR2) == -1)
 				return (0);
 		bit >>= 1;
-		usleep(5000);
+		usleep(100);
 	}
 	return (1);
 }
@@ -43,7 +43,6 @@ int main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	pid_server = ft_atoi(av[1]);
-	ft_printf("Starting to send signals...\n");
 	i = 0;
 	while (av[2][i])
 	{
@@ -53,6 +52,5 @@ int main(int ac, char **av)
 	}
 	if (!send_char_serv('\0', pid_server))
 		return (1);
-	ft_printf("Signals sent !\n");
 	return (0);
 }
