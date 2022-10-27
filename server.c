@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:53 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/27 11:56:37 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/27 12:02:38 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(void)
 	g_server.c = 0;
 	g_server.str = NULL;
 	g_server.nb_bit = 1;
-	g_server.pos = 0b10000000;	
+	g_server.pos = 0b10000000;
 	signal(SIGUSR1, handler_sig);
 	signal(SIGUSR2, handler_sig);
 	while (1)

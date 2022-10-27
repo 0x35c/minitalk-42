@@ -6,13 +6,11 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:43 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/27 11:56:23 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/10/27 12:02:51 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-t_bit_joiner    g_c_client;
 
 int	send_char_serv(char c, pid_t pid_server)
 {
@@ -35,7 +33,7 @@ int	send_char_serv(char c, pid_t pid_server)
 	return (1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	pid_t	pid_server;
 	int		i;
