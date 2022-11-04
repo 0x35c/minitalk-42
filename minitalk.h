@@ -19,10 +19,12 @@
 
 typedef struct s_bit_joiner
 {
-	char	c;
-	char	*str;
-	int		pos;
-	int		nb_bit;
-}	t_bit_joiner;
+	pid_t			pid;
+	char			c;
+	char			*str;
+	unsigned char	c_bit;
+	pid_t			pid_bit;
+	int				nb_bit;
+}	t_bit_joiner;	
 
 #endif

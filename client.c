@@ -12,6 +12,28 @@
 
 #include "minitalk.h"
 
+int	send_pid_server(pid_t pid_server, pid_t pid_client)
+{
+	pid_t bit;
+
+	bit = 0b10000000000000000000000000000000
+
+	while (bit)
+	{
+		if (bit & pid_client)
+		{
+			if (kill(pid_server, SIGUSR1) == -1)
+				return (0);
+		}
+		else
+			if (kill(pid_server, SIGUSR2) == -1)
+				return (0);
+		bit >>= 1;
+		usleep(100);
+	}
+	return (1);
+}
+
 int	send_char_serv(char c, pid_t pid_server)
 {
 	unsigned char	bit;
@@ -28,7 +50,7 @@ int	send_char_serv(char c, pid_t pid_server)
 			if (kill(pid_server, SIGUSR2) == -1)
 				return (0);
 		bit >>= 1;
-		usleep(100);
+		pause();
 	}
 	return (1);
 }
@@ -41,6 +63,8 @@ int	main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	pid_server = ft_atoi(av[1]);
+	if (!send_pid_server(pid_server, getpid()))
+		return (1);
 	i = 0;
 	while (av[2][i])
 	{

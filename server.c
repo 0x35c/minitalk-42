@@ -14,11 +14,18 @@
 
 t_bit_joiner	g_server;
 
+void	receive_client_pid(int sig)
+{
+	if (sig == SIGUSR1)
+		g_server.pid += g_server.pid_bit;
+	g_server.pid_bit >>= 1;
+}
+
 void	handler_sig(int sig)
 {
 	if (sig == SIGUSR1)
-		g_server.c += g_server.pos;
-	g_server.pos >>= 1;
+		g_server.c += g_server.c_bit;
+	g_server.c_bit >>= 1;
 	if (g_server.nb_bit == 8)
 	{
 		g_server.str = ft_strjoin_c(g_server.str, g_server.c);
@@ -29,7 +36,7 @@ void	handler_sig(int sig)
 			g_server.str = NULL;
 		}
 		g_server.c = 0;
-		g_server.pos = 0b10000000;
+		g_server.c_bit = 0b10000000;
 		g_server.nb_bit = 1;
 	}
 	else
@@ -42,10 +49,12 @@ int	main(void)
 
 	pid = getpid();
 	ft_printf("%d\n", pid);
+	g_server.pid = 0;
+	g_server.pid_bit = 0b10000000000000000000000000000000;
+	g_server.nb_bit = 1;
 	g_server.c = 0;
 	g_server.str = NULL;
-	g_server.nb_bit = 1;
-	g_server.pos = 0b10000000;
+	g_server.c_bit = 0b10000000;
 	signal(SIGUSR1, handler_sig);
 	signal(SIGUSR2, handler_sig);
 	while (1)
