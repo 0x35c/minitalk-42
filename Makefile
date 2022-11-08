@@ -6,7 +6,7 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/10/25 16:19:50 by ulayus           ###   ########.fr        #
+#    Updated: 2022/11/08 15:22:05 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SERV_SRC = server.c
 
 CLIENT_SRC = client.c
 
-CC = @gcc
+CC = @clang
 
 CFLAGS = -g -Wall -Wextra -Werror
 
