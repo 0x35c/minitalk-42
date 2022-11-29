@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:53 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/08 19:25:09 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/28 10:24:41 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,6 @@ int	main(void)
 	ft_printf("%d\n", getpid());
 	while (1)
 	{
-		if (g_server.nb_bit == 32 && g_server.pid)
-		{
-			g_server.nb_bit = 1;
-			g_server.c_bit = 0b10000000;
-			g_server.flag = 'c';
-			signal(SIGUSR1, receive_char);
-			signal(SIGUSR2, receive_char);
-		}
 		if (g_server.flag == 'p')
 		{
 			signal(SIGUSR1, receive_client_pid);
@@ -72,6 +64,14 @@ int	main(void)
 		}
 		else if (g_server.flag == 'c')
 		{
+			signal(SIGUSR1, receive_char);
+			signal(SIGUSR2, receive_char);
+		}
+		if (g_server.nb_bit == 32 && g_server.pid)
+		{
+			g_server.nb_bit = 1;
+			g_server.c_bit = 0b10000000;
+			g_server.flag = 'c';
 			signal(SIGUSR1, receive_char);
 			signal(SIGUSR2, receive_char);
 		}
