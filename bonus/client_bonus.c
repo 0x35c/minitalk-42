@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:43 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/10 15:12:16 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/10 15:28:49 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sig_received(int signum)
 {
 	if (signum == SIGUSR2)
 		ft_printf("\e[5m\x1b[38;2;153;255;204mMessage received!\n\x1b[0m\e[0m");
-	else
+	else if (signum == SIGUSR1)
 		return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:23:53 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/10 14:56:26 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/10 15:32:43 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,6 @@ void	exit_free(char *str)
 	if (str)
 		free(str);
 	exit(1);
-}
-
-void	init_handlers(int flag)
-{
-	if (flag == PID)
-	{
-		g_server.flag = 'p';
-		g_server.nb_bit = 1;
-		g_server.pid = 0;
-		g_server.pid_bit = 0b1000000000000000000000000000000;
-	}
-	else if (flag == CHAR)
-	{
-		g_server.c = 0;
-		g_server.c_bit = 0b10000000;
-		g_server.nb_bit = 1;
-	}
 }
 
 void	receive_client_pid(int signum)
@@ -75,24 +58,34 @@ void	receive_char(int signum)
 		exit_free(g_server.str);
 }
 
+void	init_handlers(int flag)
+{
+	if (flag == PID)
+	{
+		signal(SIGUSR1, receive_client_pid);
+		signal(SIGUSR2, receive_client_pid);
+		g_server.nb_bit = 1;
+		g_server.pid = 0;
+		g_server.pid_bit = 0b1000000000000000000000000000000;
+	}
+	else if (flag == CHAR)
+	{
+		signal(SIGUSR1, receive_char);
+		signal(SIGUSR2, receive_char);
+		g_server.c = 0;
+		g_server.c_bit = 0b10000000;
+		g_server.nb_bit = 1;
+	}
+}
+
 int	main(void)
 {
 	ft_printf("%d\n", getpid());
+	init_handlers(PID);
 	while (1)
 	{
-		if (g_server.flag == 'p')
-		{
-			signal(SIGUSR1, receive_client_pid);
-			signal(SIGUSR2, receive_client_pid);
-		}
 		if (g_server.nb_bit == 32 && g_server.pid)
-		{
-			g_server.nb_bit = 1;
-			g_server.c_bit = 0b10000000;
-			g_server.flag = 'c';
-			signal(SIGUSR1, receive_char);
-			signal(SIGUSR2, receive_char);
-		}
+			init_handlers(CHAR);
 	}
 	return (0);
 }

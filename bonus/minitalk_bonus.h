@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 22:28:07 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/10 14:56:54 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/10 15:33:03 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "../libft/libft.h"
 # define PID 0
 # define CHAR 1
+
+void	init_handlers(int flag);
 
 typedef struct s_bit_joiner
 {
